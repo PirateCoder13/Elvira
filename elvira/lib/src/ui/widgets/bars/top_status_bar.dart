@@ -57,6 +57,27 @@ class _TopStatusBarState extends State<TopStatusBar> {
     }
   }
 
+  Color _getBatteryColor(int level) {
+    if (level >= 50) {
+      return Colors.green; // Verde para 50% ou mais
+    } else if (level >= 30) {
+      return Colors.amber; // Amarelo para 30-49%
+    } else if (level >= 20) {
+      return Colors.orange; // Laranja para 20-29%
+    } else {
+      return Colors.red; // Vermelho para menos de 20%
+    }
+  }
+
+  IconData _getBatteryIcon(int level) {
+    if (level >= 90) return Icons.battery_full;
+    if (level >= 70) return Icons.battery_6_bar;
+    if (level >= 50) return Icons.battery_5_bar;
+    if (level >= 30) return Icons.battery_4_bar;
+    if (level >= 20) return Icons.battery_3_bar;
+    return Icons.battery_alert;
+  }
+
   @override
   void dispose() {
     _timer.cancel();
@@ -99,14 +120,18 @@ class _TopStatusBarState extends State<TopStatusBar> {
             children: [
               Column(
                 children: [
-                  const Icon(
-                    Icons.battery_full,
-                    color: Colors.white,
+                  Icon(
+                    _getBatteryIcon(_batteryLevel),
+                    color: _getBatteryColor(_batteryLevel),
                     size: 100,
                   ),
                   Text(
                     '$_batteryLevel%',
-                    style: const TextStyle(color: Colors.white, fontSize: 30),
+                    style: TextStyle(
+                      color: _getBatteryColor(_batteryLevel),
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ],
               ),

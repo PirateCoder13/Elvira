@@ -34,31 +34,51 @@ class MainScreen extends StatelessWidget {
                         () => Navigator.pushNamed(context, AppRoutes.phone),
                     icon: Image.asset(ElviraIcon.phone.path),
                     label: 'Telefone',
-                    backgroundColor: Colors.white,
-                    textColor: Colors.black,
+                    backgroundColor: Colors.blue.shade600,
+                    textColor: Colors.white,
                   ),
                   HomeFeatureButton(
-                    onPressed: () => print('clicou'),
+                    onPressed:
+                        () => Navigator.pushNamed(context, AppRoutes.medicine),
                     icon: Image.asset(ElviraIcon.medicine.path),
                     label: 'Medicamentos',
                     backgroundColor: Colors.white,
-                    textColor: Colors.black,
+                    textColor: Colors.orange.shade700,
+                    borderColor: Colors.orange.shade700,
                   ),
                   HomeFeatureButton(
-                    onPressed: () => print('clicou'),
+                    onPressed:
+                        () => Navigator.pushNamed(context, AppRoutes.emergency),
                     icon: Image.asset(ElviraIcon.emergency.path),
                     label: 'Emergência',
-                    backgroundColor: Colors.white,
-                    textColor: Colors.black,
+                    backgroundColor: Colors.red.shade600,
+                    textColor: Colors.white,
                   ),
                   HomeFeatureButton(
-                    onPressed: () => print('clicou'),
+                    onPressed:
+                        () => Navigator.pushNamed(context, AppRoutes.whatsapp),
+                    icon: const Icon(Icons.chat, size: 60, color: Colors.white),
+                    label: 'WhatsApp',
+                    backgroundColor: const Color(0xFF25D366), // Verde WhatsApp
+                    textColor: Colors.white,
+                  ),
+                  HomeFeatureButton(
+                    onPressed:
+                        () => Navigator.pushNamed(context, AppRoutes.config),
                     icon: Image.asset(ElviraIcon.cogwheel.path),
                     label: 'Configurações',
-                    backgroundColor: Colors.white,
-                    textColor: Colors.black,
+                    backgroundColor: Colors.grey.shade400,
+                    textColor: Colors.white,
                   ),
-                 
+                  HomeFeatureButton(
+                    onPressed:
+                        () =>
+                            Navigator.pushNamed(context, AppRoutes.voiceSearch),
+                    icon: const Icon(Icons.mic, size: 60, color: Colors.white),
+                    label: 'Buscar',
+                    backgroundColor: Colors.red.shade600,
+                    textColor: Colors.white,
+                  ),
                 ],
               );
             },
@@ -77,6 +97,7 @@ class HomeFeatureButton extends StatelessWidget {
   final String label;
   final Color backgroundColor;
   final Color textColor;
+  final Color? borderColor;
 
   const HomeFeatureButton({
     super.key,
@@ -85,6 +106,7 @@ class HomeFeatureButton extends StatelessWidget {
     required this.label,
     this.backgroundColor = Colors.white,
     this.textColor = Colors.black,
+    this.borderColor,
   });
 
   @override
@@ -98,9 +120,14 @@ class HomeFeatureButton extends StatelessWidget {
           backgroundColor: backgroundColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(24),
+            side:
+                borderColor != null
+                    ? BorderSide(color: borderColor!, width: 3)
+                    : BorderSide.none,
           ),
           padding: const EdgeInsets.all(8),
-          elevation: 2,
+          elevation: 4,
+          shadowColor: backgroundColor.withOpacity(0.5),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
