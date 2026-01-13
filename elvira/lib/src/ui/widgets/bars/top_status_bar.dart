@@ -44,16 +44,15 @@ class _TopStatusBarState extends State<TopStatusBar> {
     });
   }
 
-  String _getConnectionLabel(ConnectivityResult result) {
-    switch (result) {
-      case ConnectivityResult.wifi:
-        return 'Wi-Fi';
-      case ConnectivityResult.mobile:
-        return '4G';
-      case ConnectivityResult.none:
-        return 'Sem sinal';
-      default:
-        return '...';
+  String _getConnectionLabel(List<ConnectivityResult> result) {
+    if (result.contains(ConnectivityResult.wifi)) {
+      return 'Wi-Fi';
+    } else if (result.contains(ConnectivityResult.mobile)) {
+      return '4G';
+    } else if (result.contains(ConnectivityResult.none)) {
+      return 'Sem sinal';
+    } else {
+      return '...';
     }
   }
 

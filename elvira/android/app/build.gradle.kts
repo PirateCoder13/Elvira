@@ -42,3 +42,7 @@ android {
 flutter {
     source = "../.."
 }
+
+// Removing the dependency that was causing a script compilation error.
+// The newer AGP might handle this automatically.
+dependencies {}
